@@ -1,1 +1,0 @@
-# Anjali-beauty-academy-professional-working-
