@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Anjali Beautician Academy & Home Services | Kothagudem</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #ba55d3;
+            --dark: #121212;
+            --text-light: #ffffff;
+            --glass-bg: rgba(0, 0, 0, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --danger: #ff4d4d;
+            --success: #00e676;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            color: var(--text-light);
+            min-height: 100vh;
+            background: linear-gradient(
+                124deg, 
+                #ff2400, 
+                #e81e63, 
+                #9c27b0, 
+                #3f51b5, 
+                #00bcd4, 
+                #4caf50, 
+                #ffeb3b, 
+                #ff9800
+            );
+            background-size: 1600% 1600%;
+            animation: rainbowGlow 20s ease infinite;
+            line-height: 1.6;
+        }
+
+        @keyframes rainbowGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: auto;
+            padding: 0.8rem 1.2rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #fff;
+            color: #121212;
+            padding: 0.8rem 1.4rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            touch-action: manipulation;
+        }
+
+        .btn-call {
+            background: #ff9800;
+            color: #fff;
+            margin-top: 0.5rem;
+        }
+
+        .btn-verify {
+            background: var(--success);
+            color: #000;
+            width: 100%;
+            margin-top: 0.8rem;
+        }
+
+        .btn-sms {
+            background: #00b0ff;
+            color: #fff;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .btn-cancel {
+            background: var(--danger);
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 2rem 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .course-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 1.2rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .course-card h3 {
+            color: #ffeb3b;
+            margin-bottom: 0.6rem;
+            font-size: 1.1rem;
+        }
+
+        .course-card ul {
+            list-style: square;
+            padding-left: 1.2rem;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .home-visit-card, .legal-card, .owner-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-group select option {
+            background: #121212;
+            color: #fff;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+        }
+
+        /* Mobile Optimized Selector Buttons */
+        .method-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .method-btn {
+            padding: 0.8rem 0.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-align: center;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .method-btn.active {
+            background: #ff9800;
+            border-color: #ff9800;
+            box-shadow: 0 0 10px rgba(255, 152, 0, 0.8);
+        }
+
+        .method-btn.owner-btn {
+            background: rgba(138, 43, 226, 0.6);
+            border-color: #ba55d3;
+        }
+
+        .verification-panel {
+            display: none;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px dashed #ffeb3b;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+
+        .otp-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .otp-input-group input {
+            text-align: center;
+            font-size: 1.4rem;
+            letter-spacing: 6px;
+        }
+
+        .booking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .booking-table th, .booking-table td {
+            padding: 0.6rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .booking-table th {
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffeb3b;
+        }
+
+        .badge-cancelled {
+            background: rgba(255, 77, 77, 0.3);
+            color: #ff4d4d;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid #ff4d4d;
+            font-size: 0.75rem;
+        }
+
+        .badge-active {
+            background: rgba(0, 230, 118, 0.3);
+            color: #00e676;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid #00e676;
+            font-size: 0.75rem;
+        }
+
+        .info-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+
+        .info-box h3 {
+            color: #ffeb3b;
+            margin-bottom: 0.6rem;
+        }
+
+        .phone-link {
+            color: #ffeb3b;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            text-align: center;
+            padding: 1.5rem 1rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: #ffeb3b;
+            text-decoration: underline;
+            margin: 0 5px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .booking-table { display: block; overflow-x: auto; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Anjali Beautician Academy</div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Professional Beautician & Home Services</h1>
+        <p>Learn Beautician Skills or Book Offline Doorstep Home Services in Kothagudem</p>
+        <a href="#home-visit" class="btn">Book Home Visit</a>
+        <a href="tel:+917032683741" class="btn btn-call">📞 Call 7032683741</a>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">Why Choose Us?</h2>
+        <p style="text-align: center; max-width: 700px; margin: auto; font-size: 0.95rem;">
+            We offer professional beauty training at our center and convenient offline, in-person doorstep appointments in Kothagudem.
+        </p>
+    </section>
+
+    <!-- Client Booking Form -->
+    <section id="home-visit" class="section">
+        <h2 class="section-title">Book an In-Person Home Visit</h2>
+        <div class="home-visit-card">
+            <form id="bookingForm" onsubmit="handleInitialSubmit(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone / Contact Number</label>
+                    <input type="tel" id="phone" placeholder="10-digit phone number" required pattern="[0-9]{10}">
+                </div>
+                <div class="form-group">
+                    <label for="serviceType">Request Type</label>
+                    <select id="serviceType" required>
+                        <option value="">-- Select Purpose --</option>
+                        <option value="Personal Home Training">Personal Home Training</option>
+                        <option value="Home Bridal & Saree Draping">Home Bridal & Saree Draping</option>
+                        <option value="General Beauty Service">General Doorstep Beauty Service</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="address">Home Address (in Kothagudem area)</label>
+                    <textarea id="address" rows="3" placeholder="Residential address & landmark" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Verification / Action Mode:</label>
+                    <div class="method-selector">
+                        <button type="button" id="btnSelectMissedCall" class="method-btn active" onclick="switchVerificationMethod('missedCall')">📞 Call</button>
+                        <button type="button" id="btnSelectSMS" class="method-btn" onclick="switchVerificationMethod('sms')">💬 SMS</button>
+                        <button type="button" id="btnSelectOwner" class="method-btn owner-btn" onclick="openOwnerPanelDirectly()">🔒 Owner</button>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="consentCheck" required>
+                    <label for="consentCheck">I grant permission for an authorized team member to contact me and visit my location.</label>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn" style="width: 100%;">Proceed to Verification</button>
+
+                <div id="missedCallPanel" class="verification-panel">
+                    <h3 style="text-align: center; margin-bottom: 0.5rem; color: #ffeb3b;">📞 Missed Call Verification</h3>
+                    <p style="font-size: 0.85rem; text-align: center; margin-bottom: 0.8rem;">
+                        Tap below to give a missed call to <strong>+91 7032683741</strong>.
+                    </p>
+                    <a href="tel:+917032683741" onclick="enableMissedCallConfirmation()" class="btn btn-call" style="display: block; width: 100%;">📞 Call +91 7032683741</a>
+                    <button type="button" id="confirmMissedCallBtn" onclick="finalizeBooking('Missed Call')" class="btn btn-verify" disabled>Confirm Missed Call Given</button>
+                </div>
+
+                <div id="smsPanel" class="verification-panel">
+                    <h3 style="text-align: center; margin-bottom: 0.5rem; color: #ffeb3b;">💬 SMS / OTP Verification</h3>
+                    <p style="font-size: 0.85rem; text-align: center;" id="smsStatusText">
+                        A 4-digit OTP will be dispatched to your phone number.
+                    </p>
+                    <div class="otp-input-group">
+                        <input type="number" id="otpInput" placeholder="4-digit OTP" pattern="[0-9]{4}">
+                    </div>
+                    <button type="button" onclick="verifySMSOTP()" class="btn btn-sms">Verify OTP & Submit</button>
+                    <button type="button" onclick="sendSMSOTP()" class="btn" style="background: transparent; color: #ffeb3b; font-size: 0.8rem; padding: 0.4rem; margin-top: 0.4rem; width: 100%; box-shadow: none;">Resend Code</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Owner Dashboard Section -->
+    <section id="owner-panel" class="section" style="display: none;">
+        <h2 class="section-title">Owner Management Panel</h2>
+        <div class="owner-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3>Appointments</h3>
+                <button onclick="logoutOwner()" class="btn btn-cancel">Lock Panel</button>
+            </div>
+            
+            <table class="booking-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Client</th>
+                        <th>Phone</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="ownerBookingList">
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title">Location & Contact</h2>
+        <div class="info-container">
+            <div class="info-box">
+                <h3>Academy Schedule</h3>
+                <p><strong>Mon – Sat:</strong> 8:00 AM – 10:00 PM</p>
+                <p><strong>Sunday:</strong> 8:00 AM – 3:00 PM</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Training Center Address</h3>
+                <p>Anjali Beautician Academy & Home Services</p>
+                <p>Kothagudem, Telangana, 507101</p>
+                <p>Direct Contact: <a href="tel:+917032683741" class="phone-link">+91 7032683741</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Anjali Beautician Academy & Home Services.</p>
+    </footer>
+
+    <script>
+        let selectedMethod = 'missedCall';
+        let generatedOTP = null;
+        let bookings = JSON.parse(localStorage.getItem('anjali_bookings')) || [];
+
+        function switchVerificationMethod(method) {
+            selectedMethod = method;
+            document.getElementById('btnSelectMissedCall').classList.toggle('active', method === 'missedCall');
+            document.getElementById('btnSelectSMS').classList.toggle('active', method === 'sms');
+            document.getElementById('btnSelectOwner').classList.remove('active');
+        }
+
+        function openOwnerPanelDirectly() {
+            const pin = prompt('Enter Owner Access PIN:');
+            if (pin === '0143') {
+                const panel = document.getElementById('owner-panel');
+                panel.style.display = 'block';
+                renderOwnerBookings();
+                window.location.hash = '#owner-panel';
+            } else if (pin !== null) {
+                alert('Incorrect PIN. Access Denied.');
+            }
+        }
+
+        function handleInitialSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const service = document.getElementById('serviceType').value;
+            const address = document.getElementById('address').value.trim();
+
+            if (!name || !phone || !service || !address) {
+                alert('Please fill out all mandatory fields first.');
+                return;
+            }
+
+            document.getElementById('submitBtn').style.display = 'none';
+
+            if (selectedMethod === 'missedCall') {
+                document.getElementById('missedCallPanel').style.display = 'block';
+                document.getElementById('smsPanel').style.display = 'none';
+            } else {
+                document.getElementById('smsPanel').style.display = 'block';
+                document.getElementById('missedCallPanel').style.display = 'none';
+                sendSMSOTP();
+            }
+        }
+
+        function enableMissedCallConfirmation() {
+            setTimeout(() => {
+                document.getElementById('confirmMissedCallBtn').disabled = false;
+            }, 800);
+        }
+
+        function sendSMSOTP() {
+            generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+            const phone = document.getElementById('phone').value;
+            alert(`[SMS Gateway Simulator]\nOTP sent to ${phone}: ${generatedOTP}`);
+            document.getElementById('smsStatusText').innerText = `Code (${generatedOTP}) sent via SMS to ${phone}.`;
+        }
+
+        function verifySMSOTP() {
+            const userEnteredOTP = document.getElementById('otpInput').value.trim();
+            if (userEnteredOTP && userEnteredOTP === generatedOTP) {
+                finalizeBooking('SMS Verified');
+            } else {
+                alert('Invalid OTP code. Please re-enter the 4-digit OTP.');
+            }
+        }
+
+   
