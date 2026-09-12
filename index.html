@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anjali Beautician Academy & Home Services | Kothagudem</title>
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-light: #ba55d3;
+            --dark: #121212;
+            --text-light: #ffffff;
+            --glass-bg: rgba(0, 0, 0, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --danger: #ff4d4d;
+            --success: #00e676;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text-light);
+            min-height: 100vh;
+            background: linear-gradient(
+                124deg, 
+                #ff2400, 
+                #e81e63, 
+                #9c27b0, 
+                #3f51b5, 
+                #00bcd4, 
+                #4caf50, 
+                #ffeb3b, 
+                #ff9800
+            );
+            background-size: 1600% 1600%;
+            animation: rainbowGlow 20s ease infinite;
+            line-height: 1.6;
+        }
+
+        @keyframes rainbowGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        .owner-btn-nav {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            margin-bottom: 1.8rem;
+            opacity: 0.95;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .btn {
+            display: inline-block;
+            background: #fff;
+            color: #121212;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-call {
+            background: #ff9800;
+            color: #fff;
+            margin-left: 0.5rem;
+        }
+
+        .btn-verify {
+            background: var(--success);
+            color: #000;
+            width: 100%;
+            margin-top: 0.8rem;
+        }
+
+        .btn-sms {
+            background: #00b0ff;
+            color: #fff;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .btn-cancel {
+            background: var(--danger);
+            color: #fff;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.8rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .course-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .course-card h3 {
+            color: #ffeb3b;
+            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+        }
+
+        .course-card ul {
+            list-style: square;
+            padding-left: 1.2rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .home-visit-card, .legal-card, .owner-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-group select option {
+            background: #121212;
+            color: #fff;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .checkbox-group input {
+            margin-top: 3px;
+        }
+
+        .method-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .method-btn {
+            flex: 1;
+            padding: 0.6rem;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            cursor: pointer;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .method-btn.active {
+            background: #ff9800;
+            border-color: #ff9800;
+            box-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+        }
+
+        .verification-panel {
+            display: none;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px dashed #ffeb3b;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+
+        .otp-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .otp-input-group input {
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+        }
+
+        .booking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .booking-table th, .booking-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .booking-table th {
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffeb3b;
+        }
+
+        .badge-cancelled {
+            background: rgba(255, 77, 77, 0.2);
+            color: #ff4d4d;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #ff4d4d;
+            font-size: 0.8rem;
+        }
+
+        .badge-active {
+            background: rgba(0, 230, 118, 0.2);
+            color: #00e676;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #00e676;
+            font-size: 0.8rem;
+        }
+
+        .info-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 16px;
+        }
+
+        .info-box h3 {
+            color: #ffeb3b;
+            margin-bottom: 0.8rem;
+        }
+
+        .phone-link {
+            color: #ffeb3b;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        .legal-content {
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .legal-content h3 {
+            color: #ffeb3b;
+            margin: 1.2rem 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.85);
+            text-align: center;
+            padding: 1.8rem 1rem;
+            margin-top: 2.5rem;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: #ffeb3b;
+            text-decoration: underline;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.6rem; }
+            .nav-links { display: none; }
+            .booking-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Anjali Beautician Academy</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#home-visit">Book Visit</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#legal">Legal</a></li>
+                <li><a href="javascript:void(0)" onclick="toggleOwnerPanel()" class="owner-btn-nav">🔒 Owner Access</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Professional Beautician & Home Services</h1>
+        <p>Learn Beautician Skills or Book Offline Doorstep Home Services in Kothagudem</p>
+        <a href="#home-visit" class="btn">Book Home Visit</a>
+        <a href="tel:+917032683741" class="btn btn-call">📞 Call 7032683741</a>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">Why Choose Us?</h2>
+        <p style="text-align: center; max-width: 700px; margin: auto; font-size: 1rem;">
+            We offer professional beauty training at our center and convenient offline, in-person doorstep appointments. Our team visits your home directly in Kothagudem for bridal makeup, saree draping, personal consultation, or offline home classes.
+        </p>
+    </section>
+
+    <section id="courses" class="section">
+        <h2 class="section-title">Courses Offered</h2>
+        <div class="courses-grid">
+            <div class="course-card">
+                <h3>Basic Beautician</h3>
+                <p>Designed for absolute beginners to master core salon techniques.</p>
+                <ul>
+                    <li>Eyebrow Threading & Shaping</li>
+                    <li>Waxing & Hair Removal</li>
+                    <li>Basic Facials & Cleanups</li>
+                    <li>Manicure & Pedicure</li>
+                </ul>
+            </div>
+
+            <div class="course-card">
+                <h3>Saree Draping Masterclass</h3>
+                <p>Learn popular and traditional saree draping styles effortlessly.</p>
+                <ul>
+                    <li>Classic South Indian Draping</li>
+                    <li>Pleating & Box Pleating</li>
+                    <li>Lehenga Style Draping</li>
+                    <li>Quick Pinning Techniques</li>
+                </ul>
+            </div>
+
+            <div class="course-card">
+                <h3>Advanced Bridal & Makeup</h3>
+                <p>Master high-definition makeup and complete bridal styling.</p>
+                <ul>
+                    <li>HD Bridal Makeup</li>
+                    <li>Hair Styling & Updos</li>
+                    <li>Waterproof & Party Makeup</li>
+                    <li>Airbrush Makeup Basics</li>
+                </ul>
+            </div>
+
+            <div class="course-card">
+                <h3>Doorstep Home Services</h3>
+                <p>Get personalized beautician services & learning at your home.</p>
+                <ul>
+                    <li>In-Home Bridal Draping</li>
+                    <li>Personal Home Classes</li>
+                    <li>Special Occasion Styling</li>
+                    <li>Skincare Consultations</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Booking Form -->
+    <section id="home-visit" class="section">
+        <h2 class="section-title">Book an In-Person Home Visit</h2>
+        <div class="home-visit-card">
+            <form id="bookingForm" onsubmit="handleInitialSubmit(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone / Contact Number</label>
+                    <input type="tel" id="phone" placeholder="Enter 10-digit contact number" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceType">Request Type</label>
+                    <select id="serviceType" required>
+                        <option value="">-- Select Purpose --</option>
+                        <option value="Personal Home Training">Personal Home Training</option>
+                        <option value="Home Bridal & Saree Draping">Home Bridal & Saree Draping</option>
+                        <option value="General Beauty Service">General Doorstep Beauty Service</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="address">Home Address (in Kothagudem area)</label>
+                    <textarea id="address" rows="3" placeholder="Enter landmark and residential address" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Choose Preferred Verification Method:</label>
+                    <div class="method-selector">
+                        <div id="btnSelectMissedCall" class="method-btn active" onclick="switchVerificationMethod('missedCall')">📞 Missed Call</div>
+                        <div id="btnSelectSMS" class="method-btn" onclick="switchVerificationMethod('sms')">💬 SMS / OTP</div>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="consentCheck" required>
+                    <label for="consentCheck">I grant permission for an authorized team member from Anjali Beauty Parlour to contact me and visit my location in accordance with our Privacy & Telemarketing Consent Policy.</label>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn" style="width: 100%;">Proceed to Verification</button>
+
+                <div id="missedCallPanel" class="verification-panel">
+                    <h3 style="text-align: center; margin-bottom: 0.5rem;">📞 Verify via Missed Call</h3>
+                    <p style="font-size: 0.9rem; text-align: center; margin-bottom: 0.8rem;">
+                        Tap below to give a quick 1-ring missed call to <strong>+91 7032683741</strong> to verify your booking instantly.
+                    </p>
+                    <a href="tel:+917032683741" onclick="enableMissedCallConfirmation()" class="btn btn-call" style="display: block; width: 100%; margin: 0.5rem 0;">📞 Give Missed Call to +91 7032683741</a>
+                    <button type="button" id="confirmMissedCallBtn" onclick="finalizeBooking('Missed Call')" class="btn btn-verify" disabled>Confirm Missed Call Given & Submit</button>
+                </div>
+
+                <div id="smsPanel" class="verification-panel">
+                    <h3 style="text-align: center; margin-bottom: 0.5rem;">💬 Verify via SMS OTP</h3>
+                    <p style="font-size: 0.9rem; text-align: center;" id="smsStatusText">
+                        A 4-digit OTP code has been dispatched via SMS to your phone number.
+                    </p>
+                    <div class="otp-input-group">
+                        <input type="text" id="otpInput" maxlength="4" placeholder="Enter 4-digit OTP">
+                    </div>
+                    <button type="button" onclick="verifySMSOTP()" class="btn btn-sms">Verify OTP & Submit Booking</button>
+                    <button type="button" onclick="sendSMSOTP()" class="btn" style="background: transparent; color: #ffeb3b; font-size: 0.8rem; padding: 0.4rem; margin-top: 0.4rem; width: 100%; box-shadow: none;">Resend SMS Code</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Owner Dashboard Section -->
+    <section id="owner-panel" class="section" style="display: none;">
+        <h2 class="section-title">Owner Management Panel</h2>
+        <div class="owner-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3>Active & Scheduled Appointments</h3>
+                <button onclick="logoutOwner()" class="btn btn-cancel">Lock Panel</button>
+            </div>
+            <p style="font-size: 0.85rem; margin-bottom: 1rem;">Review incoming client requests and cancel appointments if unavailable or out of operational range.</p>
+            
+            <table class="booking-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Client</th>
+                        <th>Phone</th>
+                        <th>Service</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="ownerBookingList">
+                    <!-- Dynamic Booking Data -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title">Location & Call Help</h2>
+        <div class="info-container">
+            <div class="info-box">
+                <h3>Academy Schedule</h3>
+                <p><strong>Mon – Sat:</strong> 8:00 AM – 10:00 PM</p>
+                <p><strong>Sunday:</strong> 8:00 AM – 3:00 PM</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Training Center Address</h3>
+                <p>Anjali Beautician Academy & Home Services</p>
+                <p>Kothagudem, Telangana, 507101</p>
+                <p>Direct Contact: <a href="tel:+917032683741" class="phone-link">+91 7032683741
