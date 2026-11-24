@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Anjali Beauty Academy - Doorstep & Parlour Booking System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                            950: '#4c0519',
+                        },
+                        amber: {
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #be123c;
+            border-radius: 4px;
+        }
+        
+        .bg-pattern {
+            background-image: radial-gradient(rgba(244, 63, 94, 0.12) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .phone-mockup-frame {
+            border: 10px solid #1e293b;
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-pass-card, #printable-pass-card * {
+                visibility: visible;
+            }
+            #printable-pass-card {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: #ffffff !important;
+                color: #000000 !important;
+                box-shadow: none !important;
+                border: 2px solid #be123c !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-600 selection:text-white bg-pattern">
+
+    <!-- Global Toast Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[99999] flex flex-col gap-3 pointer-events-none max-w-sm w-full px-4 sm:px-0"></div>
+
+    <!-- Global App Error Fallback Banner -->
+    <div id="app-error-banner" class="hidden fixed top-0 left-0 right-0 z-[100000] bg-rose-900 text-white text-xs p-3 text-center shadow-lg border-b border-rose-700">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-2">
+            <span id="app-error-msg" class="font-medium"><i class="fa-solid fa-triangle-exclamation mr-1"></i> An error occurred. Please tap to retry.</span>
+            <button onclick="dismissAppError()" class="px-2 py-1 bg-slate-950 rounded text-slate-200 font-bold">Dismiss</button>
+        </div>
+    </div>
+
+    <!-- Simulated Phone SMS Notification Banner -->
+    <div id="sms-notification-banner" class="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] max-w-md w-[92%] bg-slate-900/95 border border-brand-500/80 rounded-2xl shadow-2xl p-4 transition-all duration-500 transform -translate-y-32 opacity-0 backdrop-blur-md">
+        <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand-700 text-white flex items-center justify-center shrink-0 shadow-lg shadow-brand-900/50">
+                <i class="fa-solid fa-comment-sms text-lg"></i>
+            </div>
+            <div class="flex-1 overflow-hidden">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold text-brand-300 tracking-wider">ANJALI BEAUTY ACADEMY</span>
+                    <span class="text-[10px] text-slate-400">Just Now</span>
+                </div>
+                <p id="sms-banner-preview" class="text-xs text-slate-200 line-clamp-2 font-mono bg-slate-950/80 p-2 rounded-lg border border-slate-800">
+                    Your 6-digit verification code is...
+                </p>
+                <div class="mt-2 flex items-center gap-2">
+                    <button onclick="autofillOTPFromBanner()" class="text-[11px] bg-brand-700 hover:bg-brand-600 text-white px-3 py-1.5 rounded-md font-semibold transition flex items-center gap-1 active:scale-95 cursor-pointer">
+                        <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> Auto-Fill 6-Digit Code
+                    </button>
+                    <button onclick="dismissSMSBanner()" class="text-[11px] text-slate-400 hover:text-white px-2 py-1">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Announcement Banner -->
+    <div class="bg-gradient-to-r from-rose-950 via-brand-900 to-rose-950 border-b border-brand-800/60 py-2.5 px-4 text-center text-xs text-rose-200 flex flex-wrap items-center justify-center gap-x-6 gap-y-1">
+        <span class="flex items-center gap-1.5 font-bold text-amber-300">
+            <i class="fa-solid fa-gift text-amber-400"></i> 100% FREE WEBSITE • ZERO BOOKING FEES
+        </span>
+        <span class="hidden sm:inline text-slate-500">•</span>
+        <span class="flex items-center gap-1.5 font-bold text-brand-300">
+            <i class="fa-solid fa-truck-ramp-box text-amber-400"></i> DOORSTEP BEAUTY SERVICES AVAILABLE
+        </span>
+        <span class="hidden md:inline text-slate-500">•</span>
+        <span class="flex items-center gap-1.5 font-bold text-rose-300">
+            <i class="fa-solid fa-venus text-brand-400"></i> STRICTLY FEMALES ONLY (NO MALES)
+        </span>
+        <span class="hidden lg:inline text-slate-500">•</span>
+        <span class="text-slate-300 font-mono font-semibold">
+            <i class="fa-solid fa-phone text-slate-400 mr-1"></i> Helpline: 7032683741
+        </span>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-800 via-brand-600 to-amber-500 flex items-center justify-center text-white shadow-lg shadow-brand-900/40 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-scissors text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white block leading-tight">
+                        Anjali Beauty Academy
+                    </span>
+                    <span class="text-[11px] text-amber-400 font-semibold tracking-wider uppercase flex items-center gap-1">
+                        <i class="fa-solid fa-house-user text-[10px]"></i> Doorstep Services & Training • Kothagudem
+                    </span>
+                </div>
+            </a>
+
+            <div class="hidden lg:flex items-center space-x-7 text-sm font-semibold text-slate-300">
+                <a href="#gallery-section" class="hover:text-amber-300 transition text-rose-300 font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-camera-retro"></i> Photo Clips
+                </a>
+                <a href="#rules-section" class="hover:text-amber-300 transition text-amber-400 font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-book-bookmark"></i> All 10 Rules
+                </a>
+                <a href="#services-catalog" class="hover:text-brand-400 transition">14 Services</a>
+                <a href="#booking-portal" class="hover:text-brand-400 transition">Free Registration</a>
+                <span class="text-xs font-mono text-slate-400">Contact: 7032683741</span>
+            </div>
+
+            <div class="flex items-center gap-2.5">
+                <!-- OWNER ACCESS BUTTON IN HEADER -->
+                <button type="button" onclick="openPasscodeModal(event)" class="bg-slate-900 hover:bg-slate-800 text-amber-400 font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-amber-500/40 transition flex items-center gap-2 shadow-md cursor-pointer active:scale-95">
+                    <i class="fa-solid fa-key text-amber-400"></i>
+                    <span class="hidden sm:inline">Owner Access</span>
+                </button>
+                <a href="#booking-portal" onclick="switchStep(1)" class="bg-gradient-to-r from-brand-700 to-brand-600 hover:from-brand-600 hover:to-brand-500 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-brand-900/40 transition flex items-center gap-2 active:scale-95">
+                    <i class="fa-solid fa-calendar-check text-amber-300"></i>
+                    <span>Free Booking</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+
+        <!-- Hero Section -->
+        <section class="relative py-12 sm:py-16 overflow-hidden border-b border-slate-800/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold shadow-sm">
+                                <i class="fa-solid fa-truck-fast text-amber-400"></i> DOORSTEP BEAUTY SERVICES
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-bold shadow-sm">
+                                <i class="fa-solid fa-gift text-emerald-400"></i> 100% FREE BOOKING WEBSITE
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-950/90 text-brand-300 border border-brand-800 text-xs font-bold shadow-sm">
+                                <i class="fa-solid fa-venus text-brand-400"></i> STRICTLY FEMALES ONLY
+                            </span>
+                        </div>
+
+                        <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+                            Doorstep Beauty & Training <span class="bg-gradient-to-r from-brand-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">Directly at Your Home</span>
+                        </h1>
+
+                        <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+                            Book professional bridal makeup, facials, mehandi, hair spa, saree box folding, or beautician training right at your home in <strong>Line Three Colony</strong>, <strong>Laxmidevipally</strong>, <strong>Ganesh Temple Road</strong>, or any locality across Kothagudem with zero online booking fees!
+                        </p>
+
+                        <!-- Address & Helpline Plain Info Box (No Call Links) -->
+                        <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                            <div class="flex items-center gap-3 text-left">
+                                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 text-lg border border-amber-500/30">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <strong class="text-white block text-sm font-semibold">Academy Main Hub Address</strong>
+                                    <span class="text-slate-300">Ganesh Temple Road, Landmark: <span class="text-amber-300 font-semibold">Shankar Steels</span>, Kothagudem, Telangana</span>
+                                </div>
+                            </div>
+                            <div class="text-right sm:text-right w-full sm:w-auto">
+                                <span class="text-[10px] text-slate-400 block uppercase tracking-wider font-semibold">Academy Contact</span>
+                                <span class="text-sm font-mono font-bold text-amber-300">7032683741</span>
+                            </div>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="#booking-portal" onclick="switchStep(1)" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-700 hover:bg-brand-600 text-white font-bold text-sm transition shadow-xl shadow-brand-900/50 flex items-center justify-center gap-3 active:scale-95">
+                                <i class="fa-solid fa-house-chimney-medical text-amber-300"></i>
+                                <span>Book Doorstep Service Now</span>
+                            </a>
+                            <a href="#gallery-section" class="w-full sm:w-auto px-6 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-semibold text-sm border border-slate-700 transition flex items-center justify-center gap-2 active:scale-95">
+                                <i class="fa-solid fa-images text-amber-400"></i>
+                                <span>View Photo Gallery Clips</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Showcase Frame -->
+                    <div class="lg:col-span-5">
+                        <div class="relative bg-gradient-to-b from-slate-900 via-brand-950 to-slate-950 border border-brand-900/70 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+                            
+                            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                                    <i class="fa-solid fa-truck-fast mr-1"></i> Doorstep & Parlour
+                                </span>
+                                <span class="text-xs text-emerald-400 font-mono flex items-center gap-1">
+                                    <i class="fa-solid fa-circle text-[8px]"></i> Strictly Females Only
+                                </span>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h2 class="font-serif text-2xl font-bold text-white">Doorstep Service Highlights</h2>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    Our female beauty professionals come directly to your house or colony with full sanitization, specialized equipment, and premium products.
+                                </p>
+                            </div>
+
+                            <!-- Highlights Grid -->
+                            <div class="grid grid-cols-1 gap-2 text-xs text-slate-200 pt-2 border-t border-slate-800 font-medium">
+                                <div class="flex items-center gap-2 p-2 rounded-xl bg-slate-950/80 border border-slate-800">
+                                    <i class="fa-solid fa-map-pin text-amber-400 text-sm"></i>
+                                    <span>Servicing: <strong>Line Three Colony</strong>, Ganesh Temple Rd, Laxmidevipally & Kothagudem</span>
+                                </div>
+                                <div class="flex items-center gap-2 p-2 rounded-xl bg-slate-950/80 border border-slate-800">
+                                    <i class="fa-solid fa-person-dress text-brand-400 text-sm"></i>
+                                    <span>100% Female Beauticians & Therapists</span>
+                                </div>
+                                <div class="flex items-center gap-2 p-2 rounded-xl bg-slate-950/80 border border-slate-800">
+                                    <i class="fa-solid fa-mobile text-emerald-400 text-sm"></i>
+                                    <span>6-Digit SMS Verification to Client's Phone</span>
+                                </div>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-center space-y-1">
+                                <span class="text-[11px] text-slate-400 block">Official Helpline Number</span>
+                                <span class="text-base font-bold text-brand-300 font-mono block">
+                                    7032683741
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PUBLIC MAKEUP & ACADEMY PHOTO CLIPS GALLERY (STARTS COMPLETELY EMPTY) -->
+        <section id="gallery-section" class="py-16 bg-slate-900/80 border-b border-slate-800/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-2">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-950/80 px-3 py-1 rounded-full border border-amber-800">
+                            <i class="fa-solid fa-camera mr-1"></i> Public Photo Clips Gallery
+                        </span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Bridal Makeups & Academy Photo Clips</h2>
+                        <p class="text-sm text-slate-300 max-w-xl">
+                            Explore work samples by Anjali Beauty Academy. Click any photo clip to inspect high-resolution details.
+                        </p>
+                    </div>
+
+                    <!-- Gallery Filter Category Tabs -->
+                    <div class="flex flex-wrap gap-2 text-xs" id="public-gallery-filter-tabs">
+                        <button onclick="filterPublicGallery('All')" class="public-tab-btn active px-3 py-2 rounded-xl bg-amber-600
